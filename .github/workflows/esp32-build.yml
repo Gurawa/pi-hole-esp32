@@ -18,6 +18,9 @@ jobs:
     name: Build ESP32 Client
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: read
+    
     strategy:
       matrix:
         environment:

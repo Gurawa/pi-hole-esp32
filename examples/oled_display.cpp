@@ -60,6 +60,9 @@ PiHoleStats currentStats;
 unsigned long lastUpdate = 0;
 const unsigned long UPDATE_INTERVAL = 30000; // Update every 30 seconds
 
+// Function declarations
+String formatNumber(long num);
+
 /**
  * Initialize OLED display
  */

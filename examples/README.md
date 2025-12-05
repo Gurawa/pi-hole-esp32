@@ -4,8 +4,30 @@ This directory contains example sketches and extensions for the Pi-hole ESP32 cl
 
 ## Available Examples
 
-### 1. OLED Display Example (Coming Soon)
+### 1. OLED Display Example
 Display Pi-hole statistics on an SSD1306 OLED display.
+
+**File:** `oled_display.cpp`
+
+**Features:**
+- Real-time statistics display on 128x64 OLED
+- WiFi status indication
+- Formatted numbers with K/M suffixes
+- Auto-refresh every 30 seconds
+
+**Required Hardware:**
+- SSD1306 OLED display (128x64, I2C)
+- 4 jumper wires for connection
+
+**Additional Libraries:**
+```ini
+lib_deps = 
+    bblanchon/ArduinoJson@^6.21.3
+    adafruit/Adafruit SSD1306@^2.5.7
+    adafruit/Adafruit GFX Library@^1.11.9
+```
+
+See [HARDWARE.md](../HARDWARE.md) for wiring instructions.
 
 ### 2. TFT Display Example (Coming Soon)
 Show statistics on a color TFT screen.
