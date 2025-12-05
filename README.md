@@ -10,6 +10,19 @@
 
 <!-- markdownlint-enable MD033 -->
 
+## 🎯 ESP32 Client Support
+
+This repository now includes **ESP32 support** for monitoring Pi-hole statistics! If you want to use an ESP32 microcontroller to display Pi-hole stats on an OLED/TFT screen or integrate with your IoT projects, see the [ESP32 Client Documentation](ESP32_README.md).
+
+**Quick Start for ESP32:**
+- See [ESP32_README.md](ESP32_README.md) for complete ESP32 setup instructions
+- ESP32 client files are in `src/`, `include/`, and `platformio.ini`
+- The ESP32 client connects to your Pi-hole server via WiFi and fetches real-time statistics
+
+---
+
+## About Pi-hole
+
 The Pi-hole® is a [DNS sinkhole](https://en.wikipedia.org/wiki/DNS_Sinkhole) that protects your devices from unwanted content without installing any client-side software.
 
 - **Easy-to-install**: our dialogs walk you through the simple installation process in less than ten minutes
