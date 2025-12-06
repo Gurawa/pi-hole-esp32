@@ -33,7 +33,10 @@ void setupWiFi() {
         Serial.printf("DNS: %s\n", WiFi.dnsIP().toString().c_str());
     } else {
         Serial.println("\nFailed to connect to WiFi!");
-        Serial.println("Please check your credentials in include/config.h");
+        Serial.println("Please configure WiFi credentials:");
+        Serial.println("1. Copy include/config.h.template to include/config.h");
+        Serial.println("2. Edit include/config.h with your WiFi SSID and password");
+        Serial.println("3. Recompile and upload");
     }
 }
 
