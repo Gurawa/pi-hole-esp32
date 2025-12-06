@@ -5,10 +5,32 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/pi-hole/graphics/refs/heads/master/Vortex/vortex_with_text.svg" alt="Pi-hole website" width="168" height="270">
   <br>
-  <strong>Network-wide ad blocking via your own Linux hardware</strong>
+  <strong>Network-wide ad blocking via your own hardware</strong>
 </p>
 
 <!-- markdownlint-enable MD033 -->
+
+# Pi-hole ESP32 Fork
+
+🚀 **This repository has been refactored to run Pi-hole on ESP32 microcontrollers!**
+
+For the **ESP32 implementation**, please see **[ESP32_README.md](ESP32_README.md)** for complete setup instructions, configuration, and usage.
+
+## About This Fork
+
+This is a lightweight version of Pi-hole designed specifically for ESP32 devices. It provides core DNS-based ad blocking functionality optimized for ESP32's limited resources.
+
+### Quick Start (ESP32)
+1. Install PlatformIO
+2. Configure WiFi in `include/config.h`
+3. Build and upload to your ESP32
+4. Configure devices to use ESP32's IP as DNS server
+
+**→ [Full ESP32 Documentation](ESP32_README.md)**
+
+---
+
+## Original Pi-hole Documentation
 
 The Pi-hole® is a [DNS sinkhole](https://en.wikipedia.org/wiki/DNS_Sinkhole) that protects your devices from unwanted content without installing any client-side software.
 
