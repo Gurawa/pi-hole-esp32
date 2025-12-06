@@ -13,3 +13,14 @@ __pycache__
 .venv/
 .fleet/
 .cache/
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+.clang_complete
+.gcc-flags.json
+lib/readme.txt
+
+# ESP32 Configuration
+include/config.h

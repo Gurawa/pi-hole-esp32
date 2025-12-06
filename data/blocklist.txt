@@ -1,0 +1,22 @@
+# Pi-hole ESP32 Sample Blocklist
+# One domain per line
+# Lines starting with # are comments
+
+# Common ad servers
+doubleclick.net
+googlesyndication.com
+googleadservices.com
+google-analytics.com
+
+# Tracking domains
+facebook.com
+googletagmanager.com
+analytics.google.com
+
+# Ad networks
+adnxs.com
+advertising.com
+adsystem.com
+
+# Example blocking domains
+# Add your own domains here
