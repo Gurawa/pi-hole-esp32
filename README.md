@@ -26,7 +26,18 @@ This is a lightweight version of Pi-hole designed specifically for ESP32 devices
 3. Build and upload to your ESP32
 4. Configure devices to use ESP32's IP as DNS server
 
-**→ [Full ESP32 Documentation](ESP32_README.md)**
+### Documentation
+- **[Quick Start Guide](QUICKSTART.md)** - Get running in 5 minutes
+- **[Full ESP32 Documentation](ESP32_README.md)** - Complete setup and usage
+- **[Comparison](COMPARISON.md)** - ESP32 vs Original Pi-hole
+
+### Features
+✅ Lightweight DNS server for ESP32  
+✅ Customizable blocklist (up to 1000 domains)  
+✅ Web interface for management  
+✅ Real-time statistics  
+✅ Low power consumption (~1W)  
+✅ Affordable hardware ($5-15)
 
 ---
 
