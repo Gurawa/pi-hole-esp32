@@ -18,6 +18,10 @@
 #define DNS_CACHE_SIZE 50
 #define DNS_CACHE_TTL 300  // 5 minutes in seconds
 
+// DNS Forwarding Configuration
+#define DNS_FORWARD_TIMEOUT 2000  // Timeout for upstream DNS queries (milliseconds)
+#define DNS_FORWARD_POLL_INTERVAL 10  // Poll interval while waiting for response (milliseconds)
+
 // Blocklist Configuration
 #define MAX_BLOCKLIST_ENTRIES 1000
 #define BLOCKLIST_FILE "/blocklist.txt"

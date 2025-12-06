@@ -40,6 +40,7 @@ public:
     
 private:
     WiFiUDP udp;
+    WiFiUDP upstreamUdp;  // Reusable UDP socket for upstream queries
     uint16_t port;
     uint8_t buffer[512];
     

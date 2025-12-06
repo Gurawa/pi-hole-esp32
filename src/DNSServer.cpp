@@ -11,6 +11,8 @@ DNSServer::DNSServer() : port(DNS_PORT), totalQueries(0), blockedQueries(0),
 bool DNSServer::begin(uint16_t p) {
     port = p;
     if (udp.begin(port)) {
+        // Initialize upstream UDP socket on a random port
+        upstreamUdp.begin(0);
         Serial.printf("DNS Server started on port %d\n", port);
         return true;
     }
@@ -55,6 +57,7 @@ void DNSServer::handleClient() {
 
 void DNSServer::stop() {
     udp.stop();
+    upstreamUdp.stop();
 }
 
 void DNSServer::resetStats() {
@@ -200,18 +203,14 @@ void DNSServer::forwardQuery(IPAddress clientIP, uint16_t clientPort,
     IPAddress upstreamDNS;
     upstreamDNS.fromString(UPSTREAM_DNS_IP);
     
-    // Create new UDP socket for upstream query
-    WiFiUDP upstreamUdp;
-    upstreamUdp.begin(0); // Use random port
-    
-    // Forward query to upstream DNS
+    // Forward query to upstream DNS using reusable socket
     upstreamUdp.beginPacket(upstreamDNS, UPSTREAM_DNS_PORT);
     upstreamUdp.write(queryBuffer, queryLen);
     upstreamUdp.endPacket();
     
-    // Wait for response (timeout 2 seconds)
+    // Wait for response with configurable timeout
     unsigned long startTime = millis();
-    while (millis() - startTime < 2000) {
+    while (millis() - startTime < DNS_FORWARD_TIMEOUT) {
         int packetSize = upstreamUdp.parsePacket();
         if (packetSize > 0) {
             uint8_t responseBuffer[512];
@@ -222,15 +221,12 @@ void DNSServer::forwardQuery(IPAddress clientIP, uint16_t clientPort,
             udp.write(responseBuffer, len);
             udp.endPacket();
             
-            upstreamUdp.stop();
             return;
         }
-        delay(10);
+        delay(DNS_FORWARD_POLL_INTERVAL);
     }
     
     // Timeout - send SERVFAIL response
-    upstreamUdp.stop();
-    
     uint8_t response[512];
     memcpy(response, queryBuffer, queryLen);
     uint16_t flags = extractUint16(response, 2);
