@@ -85,6 +85,21 @@ bool BlocklistManager::addDomain(const String& domain) {
         return false;
     }
     
+    // Validate domain format
+    if (domain.length() == 0 || domain.length() > 253) {
+        Serial.println("Invalid domain length");
+        return false;
+    }
+    
+    // Check for valid characters (alphanumeric, dots, hyphens)
+    for (size_t i = 0; i < domain.length(); i++) {
+        char c = domain.charAt(i);
+        if (!isalnum(c) && c != '.' && c != '-') {
+            Serial.printf("Invalid character in domain: %c\n", c);
+            return false;
+        }
+    }
+    
     String normalizedDomain = normalizeDomain(domain);
     
     // Check if already in blocklist

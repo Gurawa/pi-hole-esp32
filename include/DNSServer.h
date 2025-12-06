@@ -7,6 +7,7 @@
 
 // DNS packet structure definitions
 #define DNS_HEADER_SIZE 12
+#define DNS_MAX_PACKET_SIZE 512
 #define DNS_QR_QUERY 0
 #define DNS_QR_RESPONSE 1
 #define DNS_OPCODE_QUERY 0
@@ -14,15 +15,6 @@
 #define DNS_RCODE_NAME_ERROR 3
 #define DNS_TYPE_A 1
 #define DNS_CLASS_IN 1
-
-struct DNSHeader {
-    uint16_t id;
-    uint16_t flags;
-    uint16_t qdcount;
-    uint16_t ancount;
-    uint16_t nscount;
-    uint16_t arcount;
-};
 
 class DNSServer {
 public:
@@ -42,7 +34,7 @@ private:
     WiFiUDP udp;
     WiFiUDP upstreamUdp;  // Reusable UDP socket for upstream queries
     uint16_t port;
-    uint8_t buffer[512];
+    uint8_t buffer[DNS_MAX_PACKET_SIZE];
     
     // Statistics
     uint32_t totalQueries;
@@ -52,14 +44,12 @@ private:
     
     // Internal methods
     bool parseDNSQuery(uint8_t* buffer, size_t len, String& domain, uint16_t& queryType);
-    void sendDNSResponse(IPAddress clientIP, uint16_t clientPort, uint8_t* queryBuffer, 
-                        size_t queryLen, bool blocked);
     void sendBlockedResponse(IPAddress clientIP, uint16_t clientPort, uint8_t* queryBuffer, 
                            size_t queryLen);
     void forwardQuery(IPAddress clientIP, uint16_t clientPort, uint8_t* queryBuffer, 
                      size_t queryLen);
     String extractDomain(uint8_t* buffer, size_t& offset);
-    void encodeDomain(const String& domain, uint8_t* buffer, size_t& offset);
+    bool encodeDomain(const String& domain, uint8_t* buffer, size_t& offset, size_t maxSize);
     uint16_t extractUint16(uint8_t* buffer, size_t offset);
     void insertUint16(uint8_t* buffer, size_t offset, uint16_t value);
     uint32_t extractUint32(uint8_t* buffer, size_t offset);

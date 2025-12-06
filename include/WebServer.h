@@ -30,7 +30,7 @@ private:
     String getBlocklistJSON();
     String getHTMLHeader();
     String getHTMLFooter();
-    bool authenticate(AsyncWebServerRequest* request);
+    // Note: Authentication to be implemented in future version
 };
 
 #endif // WEB_SERVER_H

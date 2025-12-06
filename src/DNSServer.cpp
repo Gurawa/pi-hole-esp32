@@ -22,7 +22,7 @@ bool DNSServer::begin(uint16_t p) {
 
 void DNSServer::handleClient() {
     int packetSize = udp.parsePacket();
-    if (packetSize > 0 && packetSize < 512) {
+    if (packetSize > 0 && packetSize < DNS_MAX_PACKET_SIZE) {
         IPAddress clientIP = udp.remoteIP();
         uint16_t clientPort = udp.remotePort();
         
@@ -86,26 +86,28 @@ String DNSServer::extractDomain(uint8_t* buffer, size_t& offset) {
     String domain = "";
     uint8_t len = buffer[offset++];
     
-    while (len > 0 && offset < 512) {
+    while (len > 0 && offset < DNS_MAX_PACKET_SIZE) {
         if (domain.length() > 0) domain += ".";
         
-        for (uint8_t i = 0; i < len && offset < 512; i++) {
+        for (uint8_t i = 0; i < len && offset < DNS_MAX_PACKET_SIZE; i++) {
             domain += (char)buffer[offset++];
         }
         
-        if (offset >= 512) break;
+        if (offset >= DNS_MAX_PACKET_SIZE) break;
         len = buffer[offset++];
     }
     
     return domain;
 }
 
-void DNSServer::encodeDomain(const String& domain, uint8_t* buffer, size_t& offset) {
+bool DNSServer::encodeDomain(const String& domain, uint8_t* buffer, size_t& offset, size_t maxSize) {
     int start = 0;
     int end = domain.indexOf('.');
     
     while (end != -1) {
         int len = end - start;
+        if (offset + len + 1 > maxSize) return false;  // Buffer overflow check
+        
         buffer[offset++] = (uint8_t)len;
         for (int i = start; i < end; i++) {
             buffer[offset++] = domain.charAt(i);
@@ -117,13 +119,18 @@ void DNSServer::encodeDomain(const String& domain, uint8_t* buffer, size_t& offs
     // Last label
     int len = domain.length() - start;
     if (len > 0) {
+        if (offset + len + 2 > maxSize) return false;  // Buffer overflow check
+        
         buffer[offset++] = (uint8_t)len;
         for (int i = start; i < domain.length(); i++) {
             buffer[offset++] = domain.charAt(i);
         }
     }
     
+    if (offset >= maxSize) return false;  // Buffer overflow check
     buffer[offset++] = 0; // Null terminator
+    
+    return true;
 }
 
 uint16_t DNSServer::extractUint16(uint8_t* buffer, size_t offset) {

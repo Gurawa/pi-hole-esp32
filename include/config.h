@@ -1,7 +1,15 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// IMPORTANT: This is a template configuration file. Before uploading
+// to your ESP32, you MUST change the WiFi credentials below!
+// Copy this file to config.h and modify with your settings.
+// DO NOT commit actual credentials to version control!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 // WiFi Configuration
+// CHANGE THESE to match your network!
 #define WIFI_SSID "YourWiFiSSID"
 #define WIFI_PASSWORD "YourWiFiPassword"
 

@@ -103,7 +103,8 @@ void PiHoleWebServer::handleRoot(AsyncWebServerRequest* request) {
     html += "  fetch('/api/blocklist').then(r=>r.json()).then(data=>{";
     html += "    let html='<ul>';";
     html += "    data.domains.forEach(d=>{";
-    html += "      html+='<li>'+d+' <button onclick=\"removeDomain(\\''+d+'\\')\"'>Remove</button></li>';";
+    html += "      const safeD = d.replace(/</g,'&lt;').replace(/>/g,'&gt;');";  // HTML escape
+    html += "      html+='<li>'+safeD+' <button onclick=\"removeDomain(\\''+encodeURIComponent(d)+'\\')\"'>Remove</button></li>';";
     html += "    });";
     html += "    html+='</ul>';";
     html += "    document.getElementById('blocklistContainer').innerHTML=html;";
@@ -249,9 +250,4 @@ String PiHoleWebServer::getHTMLHeader() {
 
 String PiHoleWebServer::getHTMLFooter() {
     return "</body></html>";
-}
-
-bool PiHoleWebServer::authenticate(AsyncWebServerRequest* request) {
-    // Simple authentication check (can be enhanced)
-    return true;
 }
