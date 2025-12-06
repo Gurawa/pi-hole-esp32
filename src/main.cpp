@@ -8,7 +8,7 @@
 // Global instances
 DNSServer dnsServer;
 BlocklistManager blocklistManager;
-PiHoleWebServer* webServer;
+PiHoleWebServer webServer(&dnsServer, &blocklistManager);
 
 void setupWiFi() {
     Serial.println("\n=== Pi-hole ESP32 ===");
@@ -119,8 +119,7 @@ void setup() {
     
     // Start web server
     Serial.println("Starting web server...");
-    webServer = new PiHoleWebServer(&dnsServer, &blocklistManager);
-    if (webServer->begin(WEB_SERVER_PORT)) {
+    if (webServer.begin(WEB_SERVER_PORT)) {
         Serial.println("Web server started successfully");
     } else {
         Serial.println("Failed to start web server!");

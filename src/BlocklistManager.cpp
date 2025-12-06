@@ -150,10 +150,10 @@ String BlocklistManager::normalizeDomain(const String& domain) {
         normalized = normalized.substring(0, normalized.length() - 1);
     }
     
-    // Remove www. prefix for consistency
-    if (normalized.startsWith("www.")) {
-        normalized = normalized.substring(4);
-    }
+    // Note: We don't remove www. prefix to allow users to block
+    // www.example.com specifically if they want to
+    // The subdomain matching logic in matchesDomain() will handle
+    // blocking subdomains when the parent domain is blocked
     
     return normalized;
 }

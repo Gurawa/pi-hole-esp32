@@ -23,7 +23,6 @@ private:
     void handleBlocklist(AsyncWebServerRequest* request);
     void handleAddDomain(AsyncWebServerRequest* request);
     void handleRemoveDomain(AsyncWebServerRequest* request);
-    void handleConfig(AsyncWebServerRequest* request);
     void handleResetStats(AsyncWebServerRequest* request);
     
     // Helper methods

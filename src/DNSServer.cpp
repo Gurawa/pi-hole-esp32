@@ -73,6 +73,9 @@ bool DNSServer::parseDNSQuery(uint8_t* buffer, size_t len, String& domain, uint1
     if (offset + 4 > len) return false;
     
     queryType = extractUint16(buffer, offset);
+    offset += 2; // Move past query type
+    // Query class is at offset, offset+1 but we don't need it
+    
     return true;
 }
 
