@@ -9,6 +9,11 @@
 ## 5-Minute Setup
 
 ### Step 1: Configure WiFi
+Create config file from template:
+```bash
+cp include/config.h.template include/config.h
+```
+
 Edit `include/config.h`:
 ```cpp
 #define WIFI_SSID "YourNetworkName"

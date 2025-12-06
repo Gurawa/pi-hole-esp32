@@ -10,7 +10,6 @@ class PiHoleWebServer {
 public:
     PiHoleWebServer(DNSServer* dns, BlocklistManager* blocklist);
     bool begin(uint16_t port);
-    void handleClient();
     
 private:
     AsyncWebServer* server;

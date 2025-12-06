@@ -39,10 +39,6 @@ bool PiHoleWebServer::begin(uint16_t port) {
     return true;
 }
 
-void PiHoleWebServer::handleClient() {
-    // AsyncWebServer handles requests automatically
-}
-
 void PiHoleWebServer::handleRoot(AsyncWebServerRequest* request) {
     String html = getHTMLHeader();
     

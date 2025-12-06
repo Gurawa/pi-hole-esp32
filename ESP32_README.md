@@ -49,11 +49,16 @@ This is a refactored version of Pi-hole designed to run on ESP32 microcontroller
    ```
 
 3. **Configure WiFi Credentials**
-   Edit `include/config.h` and set your WiFi credentials:
+   Copy the template configuration file and edit it:
+   ```bash
+   cp include/config.h.template include/config.h
+   ```
+   Then edit `include/config.h` and set your WiFi credentials:
    ```cpp
    #define WIFI_SSID "YourWiFiSSID"
    #define WIFI_PASSWORD "YourWiFiPassword"
    ```
+   **Note**: `config.h` is in `.gitignore` to prevent accidentally committing credentials.
 
 4. **Configure DNS Settings** (Optional)
    In `include/config.h`, you can also configure:
@@ -104,11 +109,17 @@ This is a refactored version of Pi-hole designed to run on ESP32 microcontroller
 ## Configuration
 
 ### WiFi Settings
-Located in `include/config.h`:
+Create `include/config.h` from the template first:
+```bash
+cp include/config.h.template include/config.h
+```
+
+Then edit `include/config.h`:
 ```cpp
 #define WIFI_SSID "YourWiFiSSID"      // Your WiFi network name
 #define WIFI_PASSWORD "YourWiFiPassword"  // Your WiFi password
 ```
+**Important**: Never commit your actual `config.h` with credentials to Git!
 
 ### DNS Settings
 ```cpp

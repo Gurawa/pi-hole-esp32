@@ -21,3 +21,6 @@ __pycache__
 .clang_complete
 .gcc-flags.json
 lib/readme.txt
+
+# ESP32 Configuration
+include/config.h
