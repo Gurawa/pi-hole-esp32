@@ -100,7 +100,7 @@ void PiHoleWebServer::handleRoot(AsyncWebServerRequest* request) {
     html += "    let html='<ul>';";
     html += "    data.domains.forEach(d=>{";
     html += "      const safeD = d.replace(/</g,'&lt;').replace(/>/g,'&gt;');";  // HTML escape
-    html += "      html+='<li>'+safeD+' <button onclick=\"removeDomain(\\''+encodeURIComponent(d)+'\\')\"'>Remove</button></li>';";
+    html += "      html+='<li>'+safeD+' <button onclick=\"removeDomain(\\''+encodeURIComponent(d)+'\\')\">Remove</button></li>';";
     html += "    });";
     html += "    html+='</ul>';";
     html += "    document.getElementById('blocklistContainer').innerHTML=html;";
